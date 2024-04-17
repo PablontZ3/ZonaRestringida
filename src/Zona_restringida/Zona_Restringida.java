@@ -3,12 +3,21 @@ package Zona_restringida;
 import java.io.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
-
+/**
+ * Programa que nos muestra un menu y nos permite entrar a un area restringida.
+ * 
+ * @author Pablo Martinez
+ * @version 2.0.0
+ * La version ha sido actualizada con una refactorizacion y comentando el texto.
+ */
 public class Zona_Restringida {
     private static HashMap<String, String> usuarios = new HashMap<>();
     private static final String ARCHIVO_USUARIOS = "usuarios.txt";
     private static final String ARCHIVO_REGISTRO = "registro.txt";
-
+/**
+ * Main con el menu inicial
+ * @param args 
+ */
     public static void main(String[] args) {
         cargarUsuarios();
         Scanner scanner = new Scanner(System.in);
@@ -34,7 +43,9 @@ public class Zona_Restringida {
         } while (opcion != 2);
         scanner.close();
     }
-
+/**
+ * Cargamos los usuarios
+ */
     private static void cargarUsuarios() {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_USUARIOS))) {
             String linea;
@@ -46,7 +57,9 @@ public class Zona_Restringida {
             System.out.println("Error al cargar los usuarios.");
         }
     }
-
+/**
+ * Guardamos los usuarios
+ */
     private static void guardarUsuarios() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_USUARIOS))) {
             for (Map.Entry<String, String> usuario : usuarios.entrySet()) {
@@ -57,7 +70,11 @@ public class Zona_Restringida {
             System.out.println("Error al guardar los usuarios.");
         }
     }
-
+/**
+ * Probamos a entrar al area restringida
+ * @param scanner Escaner para escribir
+ * @return si has podido acceder
+ */
     private static boolean intentarIngreso(Scanner scanner) {
         int intentos = 3;
         while (intentos > 0) {
@@ -74,7 +91,10 @@ public class Zona_Restringida {
         }
         return false;
     }
-
+/**
+ * Apuntamos el ingrreso al area restringida
+ * @param usuario Usuario que accede al area
+ */
     private static void registrarIngreso(String usuario) {
         String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_REGISTRO, true))) {
@@ -84,7 +104,10 @@ public class Zona_Restringida {
             System.out.println("Error al registrar el ingreso.");
         }
     }
-
+/**
+ * Medu del area restringida
+ * @param scanner el escanner en el que escribiremos
+ */
     private static void menuAreaRestringida(Scanner scanner) {
         int opcion;
         do {
@@ -108,7 +131,9 @@ public class Zona_Restringida {
             }
         } while (opcion != 3);
     }
-
+/**
+ * Mostramos el registro de entradas
+ */
     private static void mostrarRegistro() {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_REGISTRO))) {
             String linea;
@@ -119,7 +144,10 @@ public class Zona_Restringida {
             System.out.println("Error al mostrar el registro.");
         }
     }
-
+/**
+ * Creamos usuario nuevo
+ * @param scanner escanner en el que escribimos
+ */
     private static void crearUsuario(Scanner scanner) {
         System.out.print("Ingrese el nuevo usuario: ");
         String nuevoUsuario = scanner.next();
