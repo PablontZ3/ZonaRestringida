@@ -1,0 +1,2 @@
+# ZonaRestringida
+Una zona restringida
